@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import Alert from "./alert";
+import { useEffect, useState } from "react";
+import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from 'react-toastify';
 import { doReqLogin } from "./redux/action/actionReducer";
+import Cookies from "js-cookie";
 
 export default function SignIn() {
   type FormValue = {
@@ -18,17 +18,16 @@ export default function SignIn() {
     formState: { errors },
   } = useForm<FormValue>();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-
   const navigate = useRouter();
   const dispacth = useDispatch()
+  const [isError, setIsError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
-//   let { user, message, status, refresh } = useSelector((state:any) => state.userReducers);
 
-  let {  message, status, refresh } = useSelector((state:any) => state.loginReducers);
-  
+  let { user, message: userMessage, status: userStatus, refresh: userRefresh } = useSelector((state:any) => state.userReducers);
+  let { message: loginMessage, status: loginStatus, refresh: loginRefresh } = useSelector((state:any) => state.loginReducers);
+
+
   const LoginValidation = {
     username: { required: 'username is required' },
     password: {
@@ -38,6 +37,19 @@ export default function SignIn() {
 
   const handleRegistration = (data:any) => {
     dispacth(doReqLogin(data))
+    
+    setIsError(userMessage)
+    setIsError(loginMessage)
+    // if (message) {
+    //   setTimeout(() => {
+    //     if(status === 200){
+    //       Alert.AlertSucces(message);
+    //     }else {
+    //       Alert.AlertError(message);
+    //     }
+    //   }, 500)
+    // }
+
   };
 
   const toggleShowPassword = () => {
@@ -45,28 +57,22 @@ export default function SignIn() {
   };
 
   useEffect(():any => {
-    const tokenNext = localStorage.getItem('TokenNext')
+    // const tokenNext = localStorage.getItem('TokenNext')
+    // if(tokenNext) {
+    //     navigate.push('/')
+    // }
 
-    if (message) {
-      setTimeout(() => {
-        if(status === 200){
-          Alert.AlertSucces(message);
-        }else {
-          Alert.AlertError(message);
-        }
-      }, 500)
+    const token = Cookies.get('access_token');
+    if(token) {
+      navigate.push('/');
     }
+    
 
-    if(tokenNext) {
-        navigate.push('/')
-    }
-
-  }, [refresh, handleRegistration]);
+  }, [handleRegistration]);
   
   return (
     
     <div className="bg-blue-900 absolute top-0 left-0 bg-gradient-to-b from-gray-900 via-gray-900 to-blue-800 bottom-0 leading-5 h-full w-full overflow-hidden">
-    <ToastContainer />
       <div className="relative min-h-screen sm:flex sm:flex-row justify-center bg-transparent rounded-3xl shadow-xl">
         <div className="flex-col flex self-center lg:px-14 sm:max-w-4xl xl:max-w-md z-10">
           <div className="self-start hidden lg:flex flex-col text-gray-300">
@@ -96,6 +102,13 @@ export default function SignIn() {
             </div>
             <form onSubmit={handleSubmit(handleRegistration)}>
                 <div className="space-y-6">
+                  
+                  {isError && (
+                    <div className="text-sm text-rose-600 border rounded-lg p-2 bg-red-200">
+                    {isError}
+                  </div>
+                  )}
+
                 <div>
                     <input
                     className="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400"

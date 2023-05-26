@@ -10,9 +10,14 @@ import {
 import { Menu, Transition, Popover } from '@headlessui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
 
 const TopBar = ({ showNav, setShowNav }:any) => {
   
+  const [username, setUserName] = useState('')
+  const [firstname, setFirstName] = useState('')
+  const [lastname, setLastName] = useState('')
+
   const navigate = useRouter();;
   const[token, setToken] = useState('');
 
@@ -29,7 +34,9 @@ const TopBar = ({ showNav, setShowNav }:any) => {
       });
   
       if (result.isConfirmed) {
-        localStorage.removeItem('TokenNext');
+        // localStorage.removeItem('TokenNext');
+        Cookies.remove('access_token');
+        localStorage.removeItem("userData");
         navigate.push('/login')
       } else {
         Swal.fire(
@@ -46,9 +53,19 @@ const TopBar = ({ showNav, setShowNav }:any) => {
     }
   };
   
-  useEffect(() => {
-    setToken(localStorage.getItem('TokenNext') || '');
+  useEffect(()=>{
+    const token = localStorage.getItem('userData')
+    if(token) {
+      const userData = JSON.parse(token)
+      setUserName(userData.username)
+      setFirstName(userData.firstname)
+      setLastName(userData.lastname)
+    }
   },[])
+
+  // useEffect(() => {
+  //   setToken(localStorage.getItem('TokenNext') || '');
+  // },[])
 
   return (
     <div
@@ -86,7 +103,7 @@ const TopBar = ({ showNav, setShowNav }:any) => {
                 />
               </picture>
               <span className="hidden md:block font-medium text-gray-700">
-                Bagas
+                {firstname} {lastname}
               </span>
               <ChevronDownIcon className="ml-2 h-4 w-4 text-gray-700" />
             </Menu.Button>

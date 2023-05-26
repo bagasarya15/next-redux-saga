@@ -12,29 +12,29 @@ import Link from 'next/link';
 import Paginate from '../paginate';
 
 const Category = (props:any) => {
-
-  let { category, message, status, refresh } = useSelector((state:any) => state.categoryReducers);
-  const dispatch = useDispatch();
-  const router = useRouter();
   
   const column = [
     { name: '#No' },
     { name: 'Jenis Kategori' },
     { name: 'Deskripsi Kategori' },
   ];
-
+  
+  const router = useRouter();
+  const { category, message, status, refresh } = useSelector((state:any) => state.categoryReducers);
+  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const totalPages = Math.ceil(category?.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentItems = category?.slice(startIndex, endIndex);
+  // const currentItems = category?.slice(startIndex, endIndex); // Menggunakan "?." untuk menghindari kesalahan jika category null atau undefinedconst currentItems = Array.isArray(category) ? category.slice(startIndex, endIndex) : [];
+  const currentItems = Array.isArray(category) ? category.slice(startIndex, endIndex) : [];
 
-  const handlePageChange = (page: any) => {
+
+  const handlePageChange = (page:any) => {
     setCurrentPage(page);
   };
-
-
+  
   const handleDelete = async (id:any) => {
     try {
       const result = await Swal.fire({
@@ -68,17 +68,18 @@ const Category = (props:any) => {
   };
 
   useEffect(() => {
-    dispatch(doRequestGetCategory());
-
+    
     if (message) {
       setTimeout(() => {
-        if(status == 200){
+        if (status === 200) {
           Alert.AlertSucces(message);
-        }else {
+        } else {
           Alert.AlertError(message);
         }
-      }, 500)
+      }, 500);
     }
+    
+    dispatch(doRequestGetCategory());
   }, [refresh]);
 
   return (
@@ -97,7 +98,7 @@ const Category = (props:any) => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-100">
-          {Array.isArray(category) && category.map((dt:any, index:any) => (
+          {(currentItems || []).map((dt: any, index: any) => (
               <tr key={dt.id}>
                 <td className="px-6 py-3 text-sm text-gray-900 text-left">
                   {index + 1}

@@ -1,0 +1,41 @@
+{
+  "page": 1,
+  "per_page": 10,
+  "total": 1,
+  "total_pages": 1,
+  "data": [
+    {
+      "name": "Indonesia",
+      "nativeName": "Indonesia",
+      "topLevelDomain": [".id"],
+      "alpha2Code": "ID",
+      "numericCode": "360",
+      "alpha3Code": "IDN",
+      "currencies": ["IDR"],
+      "callingCodes": ["62"],
+      "capital": "Jakarta",
+      "altSpellings": ["ID", "Republic of Indonesia", "Republik Indonesia"],
+      "relevance": "2",
+      "region": "Asia",
+      "subregion": "South-Eastern Asia",
+      "language": ["Indonesian"],
+      "languages": ["id"],
+      "translations": {
+        "fr": "Indonésie",
+        "nl": "Indonesië",
+        "de": "Indonesien",
+        "it": "Indonesia",
+        "ja": "インドネシア",
+        "es": "Indonesia",
+        "hr": "Indonezija"
+      },
+      "population": 255461700,
+      "latlng": [-5, 120],
+      "demonym": "Indonesian",
+      "borders": ["TLS", "MYS", "PNG"],
+      "area": 1904569,
+      "gini": 34,
+      "timezones": ["UTC+07:00", "UTC+08:00", "UTC+09:00"]
+    }
+  ]
+}

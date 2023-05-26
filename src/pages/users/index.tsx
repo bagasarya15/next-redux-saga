@@ -18,7 +18,9 @@ const Users = (props: any) => {
   let { user, message, status, refresh } = useSelector(
     (state: any) => state.userReducers
   );
+
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const column = [
     { name: "#No" },
@@ -93,7 +95,8 @@ const Users = (props: any) => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-100">
-            {(currentItems || []).map((dt: any, index: any) => (
+            {Array.isArray(currentItems) && currentItems.map((dt:any, index:any) => (
+            // {(currentItems || []).map((dt: any, index: any) => (
               <tr key={dt.id}>
                 <td className="px-6 py-3 text-sm text-gray-900 text-left">
                   {startIndex + index + 1}
@@ -108,7 +111,7 @@ const Users = (props: any) => {
                   {dt.lastname}
                 </td>
                 <td className="px-6 py-3 text-sm text-gray-900 text-left">
-                  {dt.name}
+                  {dt.role}
                 </td>
                 <td className="px-6 py-3 text-sm text-gray-900">
                   <div className="w-full text-right">

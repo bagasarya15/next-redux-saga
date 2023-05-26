@@ -3,7 +3,8 @@ import ActionTypes from "../action/actionType";
 const initialState = {
     token: [],
     message: '',
-    status: 0
+    status: 0,
+    refresh: '',
 }
 
 function loginReducers(state = initialState, action:any) {

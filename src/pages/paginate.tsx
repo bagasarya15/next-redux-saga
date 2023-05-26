@@ -24,7 +24,7 @@ const Paginate = (props:any):any =>{
             onClick={() => handlePageChange(i)}
             className={`relative z-10 inline-flex items-center ${
               currentPage === i
-                ? "bg-indigo-500 text-white focus-visible:outline-indigo-600"
+                ? "bg-blue-600 text-white focus-visible:outline-blue-600"
                 : "bg-white text-black"
             } px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 border border-solid border-gray-300`}
           >

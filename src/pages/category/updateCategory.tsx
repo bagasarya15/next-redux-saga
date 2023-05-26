@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { doUpdateCategory } from '../redux/action/actionReducer';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const UpdateCategory = (props:any) => {
   type FormValue = {
@@ -80,12 +81,12 @@ const UpdateCategory = (props:any) => {
               Submit
             </button>
 
-            <button
+            <Link href='/category'
               className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-              onClick={() => navigate.push('/category')}
+              // onClick={() => navigate.push('/category')}
             >
               Cancel
-            </button>
+            </Link>
           </div>
         </div>
       </form>

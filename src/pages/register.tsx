@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { doAdd } from './redux/action/actionReducer';
 import Alert from './alert';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Register() {
   type FormValue = {
     username: string;
     password: string;
     firstname: string;
-    lastname:string;
+    lastname: string;
     role_id: string;
   };
   const {
@@ -23,24 +24,28 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  // let { user, message, status, refresh } = useSelector((state:any) => state.userReducers);
-  
+  const [isError, setIsError] = useState('');
+
+  let { user, message, status, refresh } = useSelector((state: any) => state.userReducers);
+
   const navigate = useRouter();
   const dispatch = useDispatch()
 
   const LoginValidation = {
     username: { required: 'username is required' },
-    password: {
-        required: 'password is required',
-    },
+    password: { required: 'password is required' },
     firstname: { required: 'firstname is required'},
     lastname: { required: 'lastname is required' },
     role_id: { required: 'role is required'}
   };
 
-  const handleRegistration = (data:any) => {
+  const handleRegistration = (data: any) => {
     dispatch(doAdd(data));
-    navigate.push('/login');
+
+    if (status !== 200) {;
+      setIsError(message);
+    } 
+
   };
 
   const handleEmailChange = (e: any) => {
@@ -55,8 +60,15 @@ export default function Register() {
     setShowPassword(!showPassword);
   };
 
+  useEffect(() => {
+    
+  }, [status, message]);
+
+
   return (
+    
     <div className="bg-blue-900 absolute top-0 left-0 bg-gradient-to-b from-gray-900 via-gray-900 to-blue-800 bottom-0 leading-5 h-full w-full overflow-hidden">
+      <ToastContainer />
       <div className="relative min-h-screen sm:flex sm:flex-row justify-center bg-transparent rounded-3xl shadow-xl">
         <div className="flex-col flex self-center lg:px-14 sm:max-w-4xl xl:max-w-md z-10">
           <div className="self-start hidden lg:flex flex-col text-gray-300">
@@ -77,6 +89,19 @@ export default function Register() {
             </div>
             <form onSubmit={handleSubmit(handleRegistration)}>
                 <div className="space-y-6">
+
+                {status === 400 && (
+                    <div className="text-sm text-rose-600 border rounded-lg p-2 bg-red-200">
+                    {isError}
+                  </div>
+                )}
+                
+                {status === 200 && (
+                  <div className="text-sm text-green-600 border rounded-lg p-2 bg-green-200">
+                    Akun berhasil dibuat silahkan <a href="/login" className="underline">login</a>
+                  </div>
+                )}
+
                 <div>
                     <input
                     className="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400"

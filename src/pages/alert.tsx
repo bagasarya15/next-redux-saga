@@ -15,7 +15,7 @@ const AlertSucces = (message:any) => {
   });
 };
 
-const AlertSuccesCustom = (message:any) => {
+const AlertSuccesCustom = () => {
   toast.success(`Berhasil mendaftarkan akun, silahkan login`, {
     position: 'top-right',
     autoClose: 1500,
