@@ -2,7 +2,7 @@ import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AlertSucces = (message:any) => {
+const AlertSucces = (message: any) => {
   toast.success(`${message}`, {
     position: 'top-right',
     autoClose: 1500,
@@ -28,7 +28,7 @@ const AlertSuccesCustom = () => {
   });
 };
 
-const AlertError = (message:any) => {
+const AlertError = (message: any) => {
   toast.error(`${message}`, {
     position: 'top-right',
     autoClose: 1500,

@@ -13,7 +13,6 @@
 // import Paginate from "../paginate";
 // import Link from 'next/link';
 
-
 // const Users = (props: any) => {
 //   let { user, message, status, refresh } = useSelector(
 //     (state: any) => state.userReducers

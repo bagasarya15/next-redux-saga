@@ -1,26 +1,39 @@
 import axios from '../config/endpoint';
 import Cookies from 'js-cookie';
 
-axios.interceptors.request.use((config:any) => {
-  // const token = localStorage.getItem('access_token')  
+axios.interceptors.request.use((config: any) => {
+  // const token = localStorage.getItem('access_token')
   try {
-    const token = Cookies.get('access_token')
+    const token = Cookies.get('access_token');
     config.headers['Authorization'] = token;
     return config;
-  } catch (error:any) {
-    console.log(error.message)
+  } catch (error: any) {
+    console.log(error.message);
   }
 });
+
+axios.interceptors.response.use(
+  (response: any) => {
+    return response;
+  },
+  async error => {
+    console.log("error");
+    if (error.response.status === 401) {
+      Cookies.remove('access_token');
+    }
+    return Promise.reject(error);
+  }
+);
 
 const findAll = () => {
   return axios.get('/users');
 };
 
-const create = (data:any) => {
+const create = (data: any) => {
   return axios.post('/users', data);
 };
 
-const GetById = async (id:any) => {
+const GetById = async (id: any) => {
   return axios.get(`/users/${id}`);
 };
 
@@ -28,28 +41,28 @@ const GetById = async (id:any) => {
 //   return axios.patch(`/users/${id}`, data);
 // };
 
-const updateUserCustomer = (data:any) => {
-  console.log('isCheck', data)
+const updateUserCustomer = (data: any) => {
+  console.log('isCheck', data);
   return axios.patch(`/users/${data.id}`, data);
 };
 
-const deleteUser = async (id:any) => {
-  return axios.delete(`/users/${id}`,id);
+const deleteUser = async (id: any) => {
+  return axios.delete(`/users/${id}`, id);
 };
 
 const GetAllCategory = () => {
   return axios.get('/prod-cat-dto');
 };
 
-const PostCategory = (data:any) => {
-  return axios.post('/prod-cat-dto', data)
-}
+const PostCategory = (data: any) => {
+  return axios.post('/prod-cat-dto', data);
+};
 
-const UpdateCategory = (data:any) => {
+const UpdateCategory = (data: any) => {
   return axios.patch(`/prod-cat-dto/${data.id}`, data);
 };
 
-const DeleteCategory = async (id:any) => {
+const DeleteCategory = async (id: any) => {
   return axios.delete(`/prod-cat-dto/${id}`, id);
 };
 
@@ -61,7 +74,7 @@ const GetAllProduct = () => {
   return axios.get('/product');
 };
 
-const PostProduct = (data:any) => {
+const PostProduct = (data: any) => {
   return axios.post('/product', data, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -69,7 +82,7 @@ const PostProduct = (data:any) => {
   });
 };
 
-const UpdateProduct = (data:any) => {
+const UpdateProduct = (data: any) => {
   return axios.patch(`/product/${data.get('id')}`, data, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -77,17 +90,17 @@ const UpdateProduct = (data:any) => {
   });
 };
 
-const DeleteProduct = async (id:any) => {
+const DeleteProduct = async (id: any) => {
   return axios.delete(`/product/${id}`, id);
 };
 
-const LoginAuth = (data:any) => {
-  return axios.post('/auth/login', data)
-}
+const LoginAuth = (data: any) => {
+  return axios.post('/auth/login', data);
+};
 
 const findByPaginate = () => {
-  return axios.get('/users/paginate')
-}
+  return axios.get('/users/paginate');
+};
 export default {
   findAll,
   findByPaginate,
@@ -104,5 +117,5 @@ export default {
   PostProduct,
   UpdateProduct,
   DeleteProduct,
-  LoginAuth
+  LoginAuth,
 };

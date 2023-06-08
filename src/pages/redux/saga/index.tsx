@@ -10,13 +10,13 @@ import {
   handleGetAllProduct,
   handleAddProduct,
   handleDeleteProduct,
-  handleUpdateProduct
+  handleUpdateProduct,
 } from './productSaga';
-import{
+import {
   handleAddCategory,
   handleDeleteCategory,
   handleGetAllCategory,
-  handleUpdateCategory
+  handleUpdateCategory,
 } from './categorySaga';
 import { handleLogin } from './loginSaga';
 

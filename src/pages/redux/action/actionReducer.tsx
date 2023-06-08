@@ -1,19 +1,19 @@
 import ActionTypes from './actionType';
 
 //Action Login
-export const doReqLogin = (payload:any) => {
+export const doReqLogin = (payload: any) => {
   return {
     type: ActionTypes.REQ_GET_LOGIN,
-    payload
-  }
-}
+    payload,
+  };
+};
 
-export const doReqLoginResponse = (payload:any) => {
-  return{
+export const doReqLoginResponse = (payload: any) => {
+  return {
     type: ActionTypes.GET_LOGIN_RESPONSE,
-    payload
-  }
-}
+    payload,
+  };
+};
 //End Action Login
 
 //Action User
@@ -23,49 +23,49 @@ export const doRequestGetUser = () => {
   };
 };
 
-export const doGetUserResponse = (payload:any) => {
+export const doGetUserResponse = (payload: any) => {
   return {
     type: ActionTypes.GET_USERS_RESPONSE,
     payload,
   };
 };
 
-export const doAdd = (payload:any) => {
+export const doAdd = (payload: any) => {
   return {
     type: ActionTypes.ADD_USER,
     payload,
   };
 };
 
-export const doAddResponse = (payload:any) => {
+export const doAddResponse = (payload: any) => {
   return {
     type: ActionTypes.ADD_USER_RESPONSE,
     payload,
   };
 };
 
-export const doUpdate = (payload:any) => {
+export const doUpdate = (payload: any) => {
   return {
     type: ActionTypes.UPDATE_USER,
     payload,
   };
 };
 
-export const doUpdateResponse = (payload:any) => {
+export const doUpdateResponse = (payload: any) => {
   return {
     type: ActionTypes.UPDATE_USER_RESPONSE,
     payload,
   };
 };
 
-export const doDelete = (payload:any) => {
+export const doDelete = (payload: any) => {
   return {
     type: ActionTypes.DEL_USER,
     payload,
   };
 };
 
-export const doDeleteResponse = (payload:any) => {
+export const doDeleteResponse = (payload: any) => {
   return {
     type: ActionTypes.DEL_USER_RESPONSE,
     payload,
@@ -80,49 +80,49 @@ export const doRequestGetCategory = () => {
   };
 };
 
-export const doGetCategoryResponse = (payload:any) => {
+export const doGetCategoryResponse = (payload: any) => {
   return {
     type: ActionTypes.GET_CATEGORY_RESPONSE,
     payload,
   };
-};;
+};
 
-export const doAddCategory = (payload:any) => {
+export const doAddCategory = (payload: any) => {
   return {
     type: ActionTypes.ADD_CATEGORY,
     payload,
   };
 };
 
-export const doAddCategoryResponse = (payload:any) => {
+export const doAddCategoryResponse = (payload: any) => {
   return {
     type: ActionTypes.ADD_CATEGORY_RESPONSE,
     payload,
   };
 };
 
-export const doUpdateCategory = (payload:any) => {
+export const doUpdateCategory = (payload: any) => {
   return {
     type: ActionTypes.UPDATE_CATEGORY,
     payload,
   };
 };
 
-export const doUpdateCategoryResponse = (payload:any) => {
+export const doUpdateCategoryResponse = (payload: any) => {
   return {
     type: ActionTypes.UPDATE_CATEGORY_RESPONSE,
     payload,
   };
 };
 
-export const doDeleteCategory = (payload:any) => {
+export const doDeleteCategory = (payload: any) => {
   return {
     type: ActionTypes.DEL_CATEGORY,
     payload,
   };
 };
 
-export const doDeleteCategoryResponse = (payload:any) => {
+export const doDeleteCategoryResponse = (payload: any) => {
   return {
     type: ActionTypes.DEL_CATEGORY_RESPONSE,
     payload,
@@ -137,49 +137,48 @@ export const doRequestGetProduct = () => {
   };
 };
 
-export const doGetProductResponse = (payload:any) => {
+export const doGetProductResponse = (payload: any) => {
   return {
     type: ActionTypes.GET_PRODUCT_RESPONSE,
     payload,
   };
-};;
+};
 
-export const doAddProduct = (payload:any) => {
+export const doAddProduct = (payload: any) => {
   return {
     type: ActionTypes.ADD_PRODUCT,
     payload,
   };
 };
 
-export const doAddProductResponse = (payload:any) => {
+export const doAddProductResponse = (payload: any) => {
   return {
     type: ActionTypes.ADD_PRODUCT_RESPONSE,
     payload,
   };
-}
-;
-export const doUpdateProduct = (payload:any) => {
+};
+export const doUpdateProduct = (payload: any) => {
   return {
     type: ActionTypes.UPDATE_PRODUCT,
     payload,
   };
 };
 
-export const doUpdateProductResponse = (payload:any) => {
+export const doUpdateProductResponse = (payload: any) => {
   return {
     type: ActionTypes.UPDATE_PRODUCT_RESPONSE,
     payload,
   };
 };
 
-export const doDeleteProduct = (payload:any) => {
+export const doDeleteProduct = (payload: any) => {
   return {
     type: ActionTypes.DEL_PRODUCT,
     payload,
   };
 };
 
-export const doDeleteProductResponse = (payload:any) => {
+export const doDeleteProductResponse = (payload: any) => {
   return {
     type: ActionTypes.DEL_PRODUCT_RESPONSE,
     payload,

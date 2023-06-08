@@ -6,7 +6,7 @@ import Alert from '../alert';
 import { useDispatch } from 'react-redux';
 import { DelUser } from '../redux/action/actionReducer';
 
-const DeleteUser = (props:any) => {
+const DeleteUser = (props: any) => {
   const {
     register,
     handleSubmit,
@@ -15,16 +15,15 @@ const DeleteUser = (props:any) => {
 
   const dispatch = useDispatch();
 
-  const handleRegistration = async (data:any) => {
+  const handleRegistration = async (data: any) => {
     // const result = dispatch(DelUser(data));
-  //   const status = result.data.status;
-  //   const message = result.data.message;
-
-  //   if (status == 200) {
-  //     Alert.AlertSucces(message);
-  //     setTimeout(function () {}, 1000);
-  //     props.closeModal();
-  //   }
+    //   const status = result.data.status;
+    //   const message = result.data.message;
+    //   if (status == 200) {
+    //     Alert.AlertSucces(message);
+    //     setTimeout(function () {}, 1000);
+    //     props.closeModal();
+    //   }
   };
 
   const registerOptions = {

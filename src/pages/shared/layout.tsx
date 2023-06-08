@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
 
-export default function Layout({ children }:any) {
+export default function Layout({ children }: any) {
   const [showNav, setShowNav] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [isExpired, setIsExpired] = useState(false);
@@ -25,26 +25,30 @@ export default function Layout({ children }:any) {
   }
 
   useEffect(() => {
-    try {
-      const token:any = Cookies.get('access_token')
 
-      if(!token){
-        router.push('/404')
-      }
-
-      let decoded:any = jwt_decode(token)
-      if (decoded.exp * 1000 - Date.now() <= 0) {
-        setIsExpired(true)
-        localStorage.removeItem("userData");
-        Cookies.remove('access_token')
-        alert('token habis')
-        router.push('/login')
-      }
-      
-    } catch (error) {
-      localStorage.removeItem("userData");
-      // router.push('/login')
+    const token = Cookies.get('access_token');
+    if(!token) {
+      router.push('/login')
     }
+    // try {
+    //   const token: any = Cookies.get('access_token');
+
+    //   if (!token) {
+    //     router.push('/404');
+    //   }
+
+    //   let decoded: any = jwt_decode(token);
+    //   if (decoded.exp * 1000 - Date.now() <= 0) {
+    //     setIsExpired(true);
+    //     localStorage.removeItem('userData');
+    //     Cookies.remove('access_token');
+    //     alert('token habis');
+    //     router.push('/login');
+    //   }
+    // } catch (error) {
+    //   localStorage.removeItem('userData');
+    //   // router.push('/login')
+    // }
 
     if (typeof window != undefined) {
       window.addEventListener('resize', handleResize);
@@ -52,7 +56,6 @@ export default function Layout({ children }:any) {
       //   navigate.push('/login')
       // }
     }
-
 
     return () => {
       window.removeEventListener('resize', handleResize);

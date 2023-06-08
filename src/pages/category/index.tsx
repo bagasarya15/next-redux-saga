@@ -3,7 +3,10 @@ import { useRouter } from 'next/router';
 import { Menu, Transition } from '@headlessui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import { doDeleteCategory, doRequestGetCategory} from '../redux/action/actionReducer';
+import {
+  doDeleteCategory,
+  doRequestGetCategory,
+} from '../redux/action/actionReducer';
 import React, { useEffect, Fragment, useState } from 'react';
 import { BsThreeDotsVertical, BsPencil, BsTrash } from 'react-icons/bs';
 import Alert from '../alert';
@@ -11,16 +14,17 @@ import Swal from 'sweetalert2';
 import Link from 'next/link';
 import Paginate from '../paginate';
 
-const Category = (props:any) => {
-  
+const Category = (props: any) => {
   const column = [
     { name: '#No' },
     { name: 'Jenis Kategori' },
     { name: 'Deskripsi Kategori' },
   ];
-  
+
   const router = useRouter();
-  const { category, message, status, refresh } = useSelector((state:any) => state.categoryReducers);
+  const { category, message, status, refresh } = useSelector(
+    (state: any) => state.categoryReducers
+  );
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -28,47 +32,39 @@ const Category = (props:any) => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   // const currentItems = category?.slice(startIndex, endIndex); // Menggunakan "?." untuk menghindari kesalahan jika category null atau undefinedconst currentItems = Array.isArray(category) ? category.slice(startIndex, endIndex) : [];
-  const currentItems = Array.isArray(category) ? category.slice(startIndex, endIndex) : [];
+  const currentItems = Array.isArray(category)
+    ? category.slice(startIndex, endIndex)
+    : [];
 
-
-  const handlePageChange = (page:any) => {
+  const handlePageChange = (page: any) => {
     setCurrentPage(page);
   };
-  
-  const handleDelete = async (id:any) => {
+
+  const handleDelete = async (id: any) => {
     try {
       const result = await Swal.fire({
         title: 'Delete Confirm?',
-        text: "Data yang dihapus tidak dapat dikembalikan!",
+        text: 'Data yang dihapus tidak dapat dikembalikan!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes, delete it!',
       });
-  
+
       if (result.isConfirmed) {
         dispatch(doDeleteCategory(id));
       } else {
-        Swal.fire(
-          'Cancelled',
-          'Your data is safe.',
-          'info'
-        );
+        Swal.fire('Cancelled', 'Your data is safe.', 'info');
       }
       dispatch(doRequestGetCategory());
     } catch (error) {
       console.error('Error deleting data:', error);
-      Swal.fire(
-        'Error!',
-        'Failed to delete data. Please try again.',
-        'error'
-      );
+      Swal.fire('Error!', 'Failed to delete data. Please try again.', 'error');
     }
   };
 
   useEffect(() => {
-    
     if (message) {
       setTimeout(() => {
         if (status === 200) {
@@ -78,7 +74,7 @@ const Category = (props:any) => {
         }
       }, 500);
     }
-    
+
     dispatch(doRequestGetCategory());
   }, [refresh]);
 
@@ -89,16 +85,16 @@ const Category = (props:any) => {
         <table className="min-w-full table-fixed">
           <thead>
             <tr className="border-t border-gray-200">
-              {(column || []).map((col) => (
+              {(column || []).map(col => (
                 <th className="pr-6 py-2 text-left border-b border-gray-200 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">
                   <span className="lg:pl-2">{col.name}</span>
                 </th>
               ))}
-                <th className="pr-6 py-2 text-left border-b border-gray-200 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+              <th className="pr-6 py-2 text-left border-b border-gray-200 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-100">
-          {(currentItems || []).map((dt: any, index: any) => (
+            {(currentItems || []).map((dt: any, index: any) => (
               <tr key={dt.id}>
                 <td className="px-6 py-3 text-sm text-gray-900 text-left">
                   {index + 1}
@@ -135,13 +131,13 @@ const Category = (props:any) => {
                             <Menu.Item>
                               {({ active }) => (
                                 <Link
-                                  href = {{
+                                  href={{
                                     pathname: '/category/updateCategory',
                                     query: {
                                       id: dt.id,
                                       name: dt.name,
                                       // category_id : dt.category.id,
-                                      description: dt.description
+                                      description: dt.description,
                                     },
                                   }}
                                   // onClick={() =>
@@ -180,8 +176,8 @@ const Category = (props:any) => {
                                   //   setUserById(dt);
                                   //   setIsDelete(true);
                                   // }}
-                                  onClick={()=>{
-                                    handleDelete(dt.id)
+                                  onClick={() => {
+                                    handleDelete(dt.id);
                                   }}
                                   className={`${
                                     active
@@ -215,7 +211,11 @@ const Category = (props:any) => {
           </tbody>
         </table>
       </Content>
-      <Paginate totalPages={totalPages} currentPage={currentPage} handlePageChange={handlePageChange}/>
+      <Paginate
+        totalPages={totalPages}
+        currentPage={currentPage}
+        handlePageChange={handlePageChange}
+      />
     </div>
   );
 };

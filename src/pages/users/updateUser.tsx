@@ -8,15 +8,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { doUpdate } from '../redux/action/actionReducer';
 
-const UpdateUser = (props:any) => {
+const UpdateUser = (props: any) => {
   type FormValue = {
     id: string;
     username: string;
     password: string;
     firstname: string;
-    lastname : string;
+    lastname: string;
     role_id: string;
-  } 
+  };
   const {
     register,
     handleSubmit,
@@ -24,21 +24,21 @@ const UpdateUser = (props:any) => {
   } = useForm<FormValue>();
 
   const navigate = useRouter();
-  const {id, username, role_id, name, firstname, lastname}:any = navigate.query
-
+  const { id, username, role_id, name, firstname, lastname }: any =
+    navigate.query;
 
   const [showPassword, setShowPassword] = useState(false);
-  const [userRole, setUserRole]:any = useState('');
+  const [userRole, setUserRole]: any = useState('');
 
   const dispatch = useDispatch();
 
-  const handleRegistration = (data:any) => {
-      dispatch(doUpdate(data));
-      navigate.push('/users');
+  const handleRegistration = (data: any) => {
+    dispatch(doUpdate(data));
+    navigate.push('/users');
   };
 
   const registerOptions = {
-    id: { required: 'id is required'},
+    id: { required: 'id is required' },
     username: { required: 'username is required' },
     password: {
       required: 'password is required',
@@ -65,13 +65,13 @@ const UpdateUser = (props:any) => {
       <p className="text-gray-700 text-2xl mt-2 mb-5 font-bold uppercase">
         Update Users
       </p>
-    <div className="border-t-1 border border-black-900"></div>
+      <div className="border-t-1 border border-black-900"></div>
       <form onSubmit={handleSubmit(handleRegistration)}>
         <div className="max-w-xl bg-white py-6 px-3 m-auto w-full">
           <div className="grid grid-cols-1 gap-4 max-w-xl m-auto">
             <div className="col-span-1">
               <input
-                type='hidden'
+                type="hidden"
                 // name="username"
                 placeholder="Username"
                 autoComplete="off"
@@ -145,7 +145,8 @@ const UpdateUser = (props:any) => {
                 {...register('role_id', registerOptions.role_id)}
               >
                 <option value="">Choose role</option>
-                {Array.isArray(userRole) &&userRole.map((ur) => (
+                {Array.isArray(userRole) &&
+                  userRole.map(ur => (
                     <option key={ur.id} value={ur.id}>
                       {ur.name}
                     </option>

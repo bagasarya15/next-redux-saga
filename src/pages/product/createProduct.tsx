@@ -4,32 +4,33 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    doAddProduct,
+  doAddProduct,
   doRequestGetCategory,
 } from '../redux/action/actionReducer';
 import { useRouter } from 'next/router';
 
-const CreateProduct = (props:any) => {
-type FormValue = {
+const CreateProduct = (props: any) => {
+  type FormValue = {
     name: string;
     description: string;
     category_id: string;
-    price : string;
+    price: string;
     image: string;
-} 
+  };
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValue>();
 
-  let { category, refresh } = useSelector((state:any) => state.categoryReducers,
+  let { category, refresh } = useSelector(
+    (state: any) => state.categoryReducers
   );
 
   const dispatch = useDispatch();
   const navigate = useRouter();
 
-  const handleRegistration = async (data:any) => {
+  const handleRegistration = async (data: any) => {
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('description', data.description);
@@ -58,7 +59,7 @@ type FormValue = {
       <p className="text-gray-700 text-2xl mt-2 mb-5 font-bold uppercase">
         Create Product
       </p>
-    <div className="border-t-1 border border-black-900"></div>
+      <div className="border-t-1 border border-black-900"></div>
 
       <form onSubmit={handleSubmit(handleRegistration)}>
         <div className="max-w-xl bg-white py-6 px-3 m-auto w-full">
@@ -94,7 +95,7 @@ type FormValue = {
                 {...register('category_id', ValidationForm.category_id)}
               >
                 <option value="">Choose a category</option>
-                {category.map((ct:any) => (
+                {category.map((ct: any) => (
                   <option key={ct.id} value={ct.id}>
                     {ct.name}
                   </option>
@@ -121,7 +122,7 @@ type FormValue = {
                 <span className="sr-only">Choose product photo</span>
                 <input
                   type="file"
-                //   name="image"
+                  //   name="image"
                   className="block w-full text-sm text-slate-500
                     file:mr-4 file:py-2 file:px-4
                     file:rounded-full file:border-0

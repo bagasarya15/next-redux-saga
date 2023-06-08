@@ -4,11 +4,11 @@ import { doAddCategory } from '../redux/action/actionReducer';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
-const AddCategory = (props:any) => {
+const AddCategory = (props: any) => {
   type FormValue = {
     name: string;
     description: string;
-  } 
+  };
   const {
     register,
     handleSubmit,
@@ -18,9 +18,9 @@ const AddCategory = (props:any) => {
   const navigate = useRouter();
   const dispatch = useDispatch();
 
-  const handleRegistration = (data:any) => {
-      dispatch(doAddCategory(data));
-      navigate.push('/category');
+  const handleRegistration = (data: any) => {
+    dispatch(doAddCategory(data));
+    navigate.push('/category');
   };
 
   const registerOptions = {
@@ -28,9 +28,7 @@ const AddCategory = (props:any) => {
     description: { required: 'description is required' },
   };
 
-  useEffect(() => {
-    
-  },[]);
+  useEffect(() => {}, []);
 
   return (
     <div>

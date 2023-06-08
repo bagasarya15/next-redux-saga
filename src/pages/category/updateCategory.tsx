@@ -5,12 +5,12 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-const UpdateCategory = (props:any) => {
+const UpdateCategory = (props: any) => {
   type FormValue = {
-    id:string;
+    id: string;
     name: string;
     description: string;
-  } 
+  };
   const {
     register,
     handleSubmit,
@@ -20,15 +20,15 @@ const UpdateCategory = (props:any) => {
   const navigate = useRouter();
   const dispatch = useDispatch();
 
-  const {id, name, description}:any = navigate.query
+  const { id, name, description }: any = navigate.query;
 
-  const handleRegistration = (data:any) => {
-      dispatch(doUpdateCategory(data));
-      navigate.push('/category');
+  const handleRegistration = (data: any) => {
+    dispatch(doUpdateCategory(data));
+    navigate.push('/category');
   };
 
   const registerOptions = {
-    id: {required: 'id is required'},
+    id: { required: 'id is required' },
     name: { required: 'name is required' },
     description: { required: 'description is required' },
   };
@@ -39,9 +39,9 @@ const UpdateCategory = (props:any) => {
         <div className="max-w-xl bg-white py-6 px-3 m-auto w-full">
           <div className="grid grid-cols-1 gap-4 max-w-xl m-auto">
             <div className="col-span-1">
-            <input
+              <input
                 // name="username"
-                type='hidden'
+                type="hidden"
                 {...register('id', registerOptions.id)}
                 className="border w-full rounded-lg text-gray-800 py-2 px-2"
                 defaultValue={id}
@@ -81,7 +81,8 @@ const UpdateCategory = (props:any) => {
               Submit
             </button>
 
-            <Link href='/category'
+            <Link
+              href="/category"
               className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
               // onClick={() => navigate.push('/category')}
             >

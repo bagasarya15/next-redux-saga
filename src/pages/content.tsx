@@ -1,7 +1,7 @@
 import React from 'react';
-import Link  from 'next/link';
+import Link from 'next/link';
 
-const Content = (props:any) => {
+const Content = (props: any) => {
   const { title, path, children, ...others } = props;
   return (
     <>

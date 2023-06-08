@@ -7,14 +7,14 @@ import { doAdd } from '../redux/action/actionReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
-const AddUser = (props:any) => {
+const AddUser = (props: any) => {
   type FormValue = {
     username: string;
     password: string;
     firstname: string;
-    lastname : string;
+    lastname: string;
     role_id: string;
-  } 
+  };
   const {
     register,
     handleSubmit,
@@ -28,9 +28,9 @@ const AddUser = (props:any) => {
 
   const dispatch = useDispatch();
 
-  const handleRegistration = (data:any) => {
-      dispatch(doAdd(data));
-      navigate.push('/users');
+  const handleRegistration = (data: any) => {
+    dispatch(doAdd(data));
+    navigate.push('/users');
   };
 
   const registerOptions = {
@@ -60,7 +60,7 @@ const AddUser = (props:any) => {
       <p className="text-gray-700 text-2xl mt-2 mb-5 font-bold uppercase">
         Create Users
       </p>
-    <div className="border-t-1 border border-black-900"></div>
+      <div className="border-t-1 border border-black-900"></div>
       <form onSubmit={handleSubmit(handleRegistration)}>
         <div className="max-w-xl bg-white py-6 px-3 m-auto w-full">
           <div className="grid grid-cols-1 gap-4 max-w-xl m-auto">
@@ -130,7 +130,7 @@ const AddUser = (props:any) => {
               >
                 <option value="">Choose a role</option>
                 {Array.isArray(userRole) &&
-                  userRole.map((ur) => (
+                  userRole.map(ur => (
                     <option key={ur.id} value={ur.id}>
                       {ur.name}
                     </option>

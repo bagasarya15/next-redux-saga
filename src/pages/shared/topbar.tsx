@@ -5,63 +5,56 @@ import {
   Bars3CenterLeftIcon,
   PencilIcon,
   ChevronDownIcon,
-  ArrowLeftOnRectangleIcon
+  ArrowLeftOnRectangleIcon,
 } from '@heroicons/react/24/solid';
 import { Menu, Transition, Popover } from '@headlessui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 
-const TopBar = ({ showNav, setShowNav }:any) => {
-  
-  const [username, setUserName] = useState('')
-  const [firstname, setFirstName] = useState('')
-  const [lastname, setLastName] = useState('')
+const TopBar = ({ showNav, setShowNav }: any) => {
+  const [username, setUserName] = useState('');
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
 
-  const navigate = useRouter();;
-  const[token, setToken] = useState('');
+  const navigate = useRouter();
+  const [token, setToken] = useState('');
 
-  const logoutAuth = async (id:any) => {
+  const logoutAuth = async (id: any) => {
     try {
       const result = await Swal.fire({
         title: 'Logout Confirm',
-        text: "Anda ingin logout?",
+        text: 'Anda ingin logout?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes'
+        confirmButtonText: 'Yes',
       });
-  
+
       if (result.isConfirmed) {
         // localStorage.removeItem('TokenNext');
         Cookies.remove('access_token');
-        localStorage.removeItem("userData");
-        navigate.push('/login')
+        localStorage.removeItem('userData');
+        navigate.push('/login');
       } else {
-        Swal.fire(
-          'Cancelled'
-        );
+        Swal.fire('Cancelled');
       }
     } catch (error) {
       console.error('Error :', error);
-      Swal.fire(
-        'Error!',
-        'Failed to logout. Please try again.',
-        'error'
-      );
+      Swal.fire('Error!', 'Failed to logout. Please try again.', 'error');
     }
   };
-  
-  useEffect(()=>{
-    const token = localStorage.getItem('userData')
-    if(token) {
-      const userData = JSON.parse(token)
-      setUserName(userData.username)
-      setFirstName(userData.firstname)
-      setLastName(userData.lastname)
+
+  useEffect(() => {
+    const token = localStorage.getItem('userData');
+    if (token) {
+      const userData = JSON.parse(token);
+      setUserName(userData.username);
+      setFirstName(userData.firstname);
+      setLastName(userData.lastname);
     }
-  },[])
+  }, []);
 
   // useEffect(() => {
   //   setToken(localStorage.getItem('TokenNext') || '');
@@ -89,8 +82,7 @@ const TopBar = ({ showNav, setShowNav }:any) => {
             leave="transition ease-in duration=75"
             leaveFrom="transform scale-100"
             leaveTo="transform scale-95"
-          >
-          </Transition>
+          ></Transition>
         </Popover>
         <Menu as="div" className="relative inline-block text-left">
           <div>
@@ -122,7 +114,7 @@ const TopBar = ({ showNav, setShowNav }:any) => {
                 <Menu.Item>
                   <button
                     // href="/login"
-                    onClick={ logoutAuth }
+                    onClick={logoutAuth}
                     className="flex hover:bg-blue-600 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center w-full"
                   >
                     <ArrowLeftOnRectangleIcon className="h-4 w-4 mr-2" />

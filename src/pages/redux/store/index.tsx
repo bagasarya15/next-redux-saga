@@ -12,14 +12,19 @@ import rootSaga from '../saga';
 const logger = createLogger();
 const saga = createSagaMiddleware();
 const reducer = combineReducers({
-  userReducers, productReducers, categoryReducers, loginReducers
-})
+  userReducers,
+  productReducers,
+  categoryReducers,
+  loginReducers,
+});
 
 const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({serializableCheck: false, }).concat(logger).concat(saga)
-})
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({ serializableCheck: false })
+      .concat(logger)
+      .concat(saga),
+});
 
-saga.run(rootSaga) //untuk run saga
+saga.run(rootSaga); //untuk run saga
 export default store;
